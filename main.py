@@ -10,8 +10,23 @@ while True:
     if city.isalpha():
         break
 
-gender = input("What is your gender? ")
-education = input("What type of education did you finish last? (middle school, high school, college, masters, PhD, etc.) ")
+# tuple for the genders, including the other option
+gender_tuple = ("male", "female", "transgender", "non-binary", "gender neutral", "gender fluid", "other")
+
+while True:
+    gender = input("What is your gender? (male/ female/ gender neutral/ gender fluid/ other) ")
+    #searchs for input in gender_tuple
+    if gender.lower() in gender_tuple:
+        break
+
+education_tuple = ("middle school", "high school", "college", "bachelor degree", "master degree", "phd")
+
+while True:
+    education = input(
+        "What type of education did you finish last? (middle school, high school, bachelor degree, master degree, PhD) ")
+    #searching for input in education_tuple
+    if education.lower() in education_tuple:
+        break
 
 while True:
     pets = input("Do you own pets? ")
@@ -20,5 +35,5 @@ while True:
         break
 
 # prints the report
-print(f"The respondent is {age} years old, {gender}, from {city} city. The highest level of education they have finished is {education}.")
+print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they have finished is {education.lower()}.")
 
