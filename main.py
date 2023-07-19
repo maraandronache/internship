@@ -15,8 +15,10 @@ education = input("What type of education did you finish last? (middle school, h
 
 while True:
     pets = input("Do you own pets? ")
+    # checks that the user has inputted a clear yes/no answer
     if pets == 'yes' or pets == 'y' or pets == 'Yes' or pets == 'no' or pets == 'n' or pets == 'No':
         break
 
-print(f"The respondent is {age} years old, {gender}, from {city} city. The higher level of education they have finished is {education}.")
+# prints the report
+print(f"The respondent is {age} years old, {gender}, from {city} city. The highest level of education they have finished is {education}.")
 
