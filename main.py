@@ -28,17 +28,26 @@ while True:
     if education.lower() in education_tuple:
         break
 
-# prints the report
-print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
-      f"have finished is {education.lower()}.")
-
 while True:
     pets = input("Do you own pets? ")
     # checks that the user has inputted a clear yes/no answer
     if pets.lower() == 'yes' or pets.lower() == 'y' or pets.lower() == 'no' or pets.lower() == 'n':
         break
 
-if pets.lower() == 'yes' or pets.lower() == 'y': # continues asking questions based on the previous answer
+if pets.lower() == 'yes' or pets.lower() == 'y':
+    pets = True
+else:
+    pets = False
+
+# prints report depending on the previous answer \if they do or do not own pets)
+if pets == True:
+    print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
+          f"have finished is {education.lower()} and they own pets.")
+else:
+    print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
+          f"have finished is {education.lower()} and they do not own pets.")
+
+if pets == True: # continues asking questions based on the previous answer
     while True:
         no_pets = input("How many pets do you own? ")
         if no_pets.isnumeric(): # checks the input for no_pets is a number
