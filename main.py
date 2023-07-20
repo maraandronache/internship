@@ -29,43 +29,44 @@ while True:
         break
 
 while True:
-    pets = input("Do you own pets? ")
+    inp = input("Do you own pets? (yes/no) ")
     # checks that the user has inputted a clear yes/no answer
-    if pets.lower() == 'yes' or pets.lower() == 'y' or pets.lower() == 'no' or pets.lower() == 'n':
+    if inp.lower() == 'yes' or inp.lower() == 'no':
         break
 
-if pets.lower() == 'yes' or pets.lower() == 'y':
-    pets = True
+if inp.lower() == 'yes':  # changes the input into a boolean variable
+    has_pets = True
 else:
-    pets = False
+    has_pets = False
 
-# prints report depending on the previous answer \if they do or do not own pets)
-if pets == True:
+# prints report depending on the previous answer (if they do or do not own pets)
+if has_pets:
     print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
           f"have finished is {education.lower()} and they own pets.")
 else:
     print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
           f"have finished is {education.lower()} and they do not own pets.")
 
-if pets == True: # continues asking questions based on the previous answer
+if has_pets:  # continues asking questions based on the previous answer
     while True:
         no_pets = input("How many pets do you own? ")
-        if no_pets.isnumeric(): # checks the input for no_pets is a number
+        if no_pets.isnumeric():  # checks the input to make sure no_pets is a number
             break
-    pet_dict = {} # creates a dictionary so both the name and the specie of pets can be stored
+    pet_dict = {}  # creates a dictionary so both the name and the type of pet can be stored
     for i in range(int(no_pets)):
         name = input("What is the name of your pet? ")
-        name = name.capitalize() # capitalizes first letter of the pet name
-        specie = input(f"What specie is {name}? ")
-        pet_dict[name] = specie # adds name and specie to the dictionary
+        name = name.capitalize()  # capitalizes first letter of the pet name
+        type = input(f"What type of pet is {name}? ")
+        pet_dict[name] = type  # adds name and type to the dictionary
 else:
     while True:
-        adopt = input("Are you open to the idea of owning pets? ")
+        open_to_adopt = input("Are you open to the idea of owning pets? ")
         # checks the answer is a clear yes or no
-        if adopt.lower() == 'yes' or adopt.lower() == 'y' or adopt.lower() == 'no' or adopt.lower() == 'n':
+        if open_to_adopt.lower() == 'yes' or open_to_adopt.lower() == 'y' or open_to_adopt.lower() == 'no' or \
+                open_to_adopt.lower() == 'n':
             break
     # asks final questions based on the previous answer
-    if adopt.lower() == 'yes' or adopt.lower() == 'y':
+    if open_to_adopt.lower() == 'yes' or open_to_adopt.lower() == 'y':
         issue = input("What is stopping you from buying or adopting some? ")
     else:
-        ch_mind = input("What would change your mind? ")
+        change_mind = input("What would change your mind? ")
