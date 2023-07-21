@@ -1,4 +1,4 @@
-file = open("input.txt", 'a')
+file = open("input.csv", 'a')
 
 while True:
     age = input("What is your age? ")
@@ -49,7 +49,7 @@ else:
     print(f"The respondent is {age} years old, {gender.lower()}, from {city} city. The highest level of education they "
           f"have finished is {education.lower()} and they do not own pets.")
 
-file.write(age + ' ' + city + ' ' + gender + ' ' + education + ' ')
+file.write(age + ',' + city + ',' + gender + ',' + education + ',')
 file.write(f"{has_pets}")
 
 if has_pets:  # continues asking questions based on the previous answer
@@ -57,14 +57,14 @@ if has_pets:  # continues asking questions based on the previous answer
         no_pets = input("How many pets do you own? ")
         if no_pets.isnumeric():  # checks the input to make sure no_pets is a number
             break
-    file.write(f" {no_pets}")
+    file.write(f",{no_pets}")
     pet_dict = {}  # creates a dictionary so both the name and the type of pet can be stored
     for i in range(int(no_pets)):
         name = input("What is the name of your pet? ")
         name = name.capitalize()  # capitalizes first letter of the pet name
         type = input(f"What type of pet is {name}? ")
         pet_dict[name] = type  # adds name and type to the dictionary
-        file.write(' ' + name + ' ' + type)
+        file.write(',' + name + ',' + type)
 else:
     while True:
         open_to_adopt = input("Are you open to the idea of owning pets? ")
@@ -72,13 +72,13 @@ else:
         if open_to_adopt.lower() == 'yes' or open_to_adopt.lower() == 'y' or open_to_adopt.lower() == 'no' or \
                 open_to_adopt.lower() == 'n':
             break
-        file.write(' ' + open_to_adopt)
+    file.write(',' + open_to_adopt)
     # asks final questions based on the previous answer
     if open_to_adopt.lower() == 'yes' or open_to_adopt.lower() == 'y':
         issue = input("What is stopping you from buying or adopting some? ")
-        file.write(' ' + issue)
+        file.write(',' + issue)
     else:
         change_mind = input("What would change your mind? ")
-        file.write(' ' + change_mind)
+        file.write(',' + change_mind)
 
 file.write('\n')
