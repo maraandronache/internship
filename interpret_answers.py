@@ -11,6 +11,8 @@ def main():
     female_cnt = 0
     male_owners = 0
     female_owners = 0
+    open_male_non_owners = 0
+    open_female_non_owners = 0
     with open("input.csv", 'r') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -28,14 +30,16 @@ def main():
                     pet_types.append(row[7 + 2 * i])
             else:
                 non_owners_ages.append(int(row[0]))
+                if row[5].lower() == 'yes':
+                    if row[2] == 'male':
+                        open_male_non_owners += 1
+                    else:
+                        open_female_non_owners += 1
             # the overall number of male and females
             if row[2] == 'male':
                 male_cnt += 1
             else:
                 female_cnt += 1
-
-    print(pet_types)
-    print(pet_names)
 
     report = open("report.txt", 'a')
 
@@ -48,7 +52,7 @@ def main():
 
     report.write(f"A total number of {total_resp} people have taken this survey, out of which {owns_pets} own pets and "
                  f"{not_owns_pets} do not.\nThe average age of all the respondents is {average(all_ages)}. ")
-    report.write(f"{male_cnt} males ({percentage_gender}%) and {female_cnt} females {100-percentage_gender}%) have "
+    report.write(f"{male_cnt} males ({percentage_gender}%) and {female_cnt} females ({100-percentage_gender}%) have "
                  f"answered this survey\n")
     report.write(f"Overall, about {percentage_owners}% own pets, and {100-percentage_owners}% do not.\nThe average age "
                  f"of those who own pets is {average(owners_ages)}, while the average age of those who do not is "
@@ -66,8 +70,17 @@ def main():
     most_common_name = most_common(pet_names)
     most_common_type = most_common(pet_types)
 
-    report.write(f"The most common type of pet is {most_common_type}.\nThe most common pet name that appears in the "
+    report.write(f"The most common type of pet is a {most_common_type}.\nThe most common pet name that appears in the "
                  f"survey is {most_common_name}.\n")
+
+    percentage_non_owners = percentage(open_male_non_owners, open_female_non_owners)
+
+    if open_male_non_owners > open_female_non_owners:
+        report.write(f"More male non-owners({percentage_non_owners}%) are open to adopting or buying pets than "
+                     f"female({100 - percentage_non_owners}%) non-owners.\n")
+    else:
+        report.write(f"More female non-owners ({100 - percentage_non_owners}%) are open to adopting or buying pets than"
+                     f" male non-owners ({percentage_non_owners}%).\n")
 
 
 def average(list):
