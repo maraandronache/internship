@@ -4,7 +4,7 @@ import csv
 def main():
     all_ages = []  # list in which we add all the ages
     owners_ages = []  # list in which we put all the pet owners' ages
-    non_owners_ages = []  # list in which we put all the non pet owners' ages
+    non_owners_ages = []  # list in which we put all the non-pet owners' ages
     pet_types = []
     pet_names = []
     male_cnt = 0
@@ -24,8 +24,8 @@ def main():
                 else:
                     female_owners += 1
                 for i in range(num):
-                    pet_names.append(row[num + i + 1]) # adding all names of pets in pet_names
-                    pet_types.append(row[num + i + 2])
+                    pet_names.append(row[6 + 2 * i])  # adding all names of pets in pet_names
+                    pet_types.append(row[7 + 2 * i])
             else:
                 non_owners_ages.append(int(row[0]))
             # the overall number of male and females
@@ -33,6 +33,9 @@ def main():
                 male_cnt += 1
             else:
                 female_cnt += 1
+
+    print(pet_types)
+    print(pet_names)
 
     report = open("report.txt", 'a')
 
@@ -49,7 +52,7 @@ def main():
                  f"answered this survey\n")
     report.write(f"Overall, about {percentage_owners}% own pets, and {100-percentage_owners}% do not.\nThe average age "
                  f"of those who own pets is {average(owners_ages)}, while the average age of those who do not is "
-                 f"{average(non_owners_ages)}\n")
+                 f"{average(non_owners_ages)}.\n")
 
     if male_owners > female_owners:
         report.write(f"There are more male pet owners ({percentage_gender_owners}%) than female ones "
@@ -58,9 +61,13 @@ def main():
         report.write(f"There are more female owners ({100-percentage_gender_owners}%) than female ones "
                      f"({percentage_gender_owners}%).\n")
     else:
-        report.write("There are just as many male and female pet owners.\n")
+        report.write("There are just as many male and female pet owners.\n\n")
 
+    most_common_name = most_common(pet_names)
+    most_common_type = most_common(pet_types)
 
+    report.write(f"The most common type of pet is {most_common_type}.\nThe most common pet name that appears in the "
+                 f"survey is {most_common_name}.\n")
 
 
 def average(list):
@@ -70,7 +77,21 @@ def average(list):
 
     return round(sum/len(list), 2)
 
+
 def percentage(a, b):
     return round(a * 100 / (a + b), 2)
+
+
+def most_common(list):
+    maxim = 0
+    n = list[0]
+
+    for x in list:
+        if maxim < list.count(x):
+            maxim = list.count(x)
+            n = x
+
+    return n
+
 
 main()
