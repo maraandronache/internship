@@ -83,7 +83,7 @@ def main():
                      f" male non-owners ({percentage_non_owners}%).\n")
 
 
-def average(list):
+def average(list): # for average of ages
     sum = 0
     for x in list:
         sum += int(x)
@@ -91,11 +91,12 @@ def average(list):
     return round(sum/len(list), 2)
 
 
-def percentage(a, b):
+def percentage(a, b): # so we easily write the percentage
     return round(a * 100 / (a + b), 2)
 
 
 def most_common(list):
+    # to find the most common element in a list (to see what it is to be done when there are multiple answers)
     maxim = 0
     n = list[0]
 
