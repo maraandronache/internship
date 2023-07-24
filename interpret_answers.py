@@ -2,9 +2,14 @@ import csv
 
 
 def main():
-    all_ages = []  # list in which we add all the ages
-    owners_ages = []  # list in which we put all the pet owners' ages
-    non_owners_ages = []  # list in which we put all the non-pet owners' ages
+    # have applied list comprehension for these 3 lists, i don't know if it's necessary more efficient, but it is
+    # for the sake of learning
+    # list in which we add all the ages
+    all_ages = [int(row[0]) for row in csv.reader(open("input.csv", 'r'))]
+    # list in which we put all the pet owners' ages
+    owners_ages = [int(row[0]) for row in csv.reader(open("input.csv", 'r')) if row[4] == 'True']
+    # list in which we put all the non-pet owners' ages
+    non_owners_ages = [int(row[0]) for row in csv.reader(open("input.csv", 'r')) if row[4] == 'False']
     pet_types = []
     pet_names = []
     male_cnt = 0
