@@ -21,21 +21,17 @@ def main():
     with open("input.csv", 'r') as file:
         reader = csv.reader(file)
         for row in reader:
-            all_ages.append(int(row[0]))
             # seeing how many people own/do not own pets
             if row[4] == 'True':
-                owners_ages.append(int(row[0]))
-                num = int(row[5])
                 if row[2] == 'male':
                     male_owners += 1
                 else:
                     female_owners += 1
+                num = int(row[5])
                 for i in range(num):
                     pet_names.append(row[6 + 2 * i])  # adding all names of pets in pet_names
                     pet_types.append(row[7 + 2 * i])
-            else:
-                non_owners_ages.append(int(row[0]))
-                if row[5].lower() == 'yes':
+            elif row[5].lower() == 'yes':
                     if row[2] == 'male':
                         open_male_non_owners += 1
                     else:
