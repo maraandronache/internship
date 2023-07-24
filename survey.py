@@ -64,7 +64,7 @@ if has_pets:  # continues asking questions based on the previous answer
         name = name.capitalize()  # capitalizes first letter of the pet name
         type = input(f"What type of pet is {name}? ")
         pet_dict[name] = type  # adds name and type to the dictionary
-        file.write(',' + name + ',' + type)
+        file.write(',' + name + ',' + type.lower())
 else:
     while True:
         open_to_adopt = input("Are you open to the idea of owning pets? ")
