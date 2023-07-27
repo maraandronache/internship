@@ -1,5 +1,6 @@
 from Question import Question
 from QuestionsEnum import QuestionEnum
+from SurveyResponse import SurveyResponse
 
 
 class UserInfo:
@@ -18,6 +19,16 @@ class UserInfo:
         self.change_mind = None
         self.no_of_pets = 0
         self.pet_dict = {}
+        self.dict = self.add_answers()
+
+    def add_answers(self):
+        survey_response = SurveyResponse()
+        survey_response.add_answer(QuestionEnum.Q1.value, self.age)
+        survey_response.add_answer(QuestionEnum.Q2.value, self.city)
+        survey_response.add_answer(QuestionEnum.Q3.value, self.gender)
+        survey_response.add_answer(QuestionEnum.Q4.value, self.education)
+        survey_response.add_answer(QuestionEnum.Q5.value, self.has_pets)
+        return survey_response.dict
 
 
     def summary_report(self):
@@ -55,7 +66,8 @@ class UserInfo:
 
     def write_input(self):
         with open("collected_data.csv", 'a') as file:
-            file.write(f"{self.age},{self.city},{self.gender},{self.education},{self.has_pets},")
+            for x in self.dict.keys():
+                file.write(f"{self.dict[x]},")
             if self.has_pets:
                 file.write(f"{self.no_of_pets}")
                 for x in self.pet_dict.keys():
