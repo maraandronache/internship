@@ -1,4 +1,6 @@
 from enum import Enum
+
+
 class QuestionEnum(Enum):
     Q1 = "What is your age? "
     Q2 = "What city are you from? "
