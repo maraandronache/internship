@@ -7,5 +7,5 @@ class Question:
     def ask(self):
         while True:
             answer = input(self.prompt)
-            if self.validation and self.validation(answer):
+            if not self.validation or self.validation(answer):
                 return answer
