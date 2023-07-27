@@ -15,3 +15,4 @@ class QuestionEnum(Enum):
     Q11 = "What would change your mind? "
     GENDER = ("male", "female")
     EDUCATION = ("middle school", "high school", "college", "bachelor degree", "master degree", "phd")
+    YESNO = ("yes", "no")
