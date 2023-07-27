@@ -1,28 +1,5 @@
-from enum import Enum
-
-
-class Question:
-    def __init__(self, prompt, validation=None):
-        self.prompt = prompt
-        self.validation = validation
-
-    def ask(self):
-        while True:
-            answer = input(self.prompt)
-            if self.validation and self.validation(answer):
-                return answer
-
-
-class QuestionEnum(Enum):
-    Q1 = "What is your age? "
-    Q2 = "What city are you from?"
-    Q3 = "What is your gender?"
-    Q4 = "What type of education did you finish last?(middle school, high school, bachelor degree, master degree, PhD) "
-    Q5 = "Do you own pets? "
-    GENDER = ("male", "female")
-    EDUCATION = ("middle school", "high school", "college", "bachelor degree", "master degree", "phd")
-
-
+from Question import Question
+from QuestionsEnum import QuestionEnum
 class UserInfo:
     def __init__(self):
         self.age = Question(QuestionEnum.Q1.value, validation=lambda x: x.isnumeric()).ask()
