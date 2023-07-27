@@ -11,7 +11,7 @@ class UserInfo:
                                                                               QuestionEnum.EDUCATION.value).ask()
         if Question(QuestionEnum.Q5.value, validation=lambda x: x.lower() in QuestionEnum.YESNO.value).ask() == "yes":
                 self.has_pets = True
-            else:
+        else:
                 self.has_pets = False
         self.open_to_adopt = None
         self.issue = None
@@ -34,7 +34,7 @@ class UserInfo:
 
     def get_more_info(self):
         if self.has_pets:
-            self.no_of_pets = self.Question(QuestionEnum.Q6.value, validation=lambda x: x.isnumeric())
+            self.no_of_pets = Question(QuestionEnum.Q6.value, validation=lambda x: x.isnumeric()).ask()
             self.store_pet_info()
         else:
             self.open_to_adopt = Question(QuestionEnum.Q9.value,
@@ -47,7 +47,7 @@ class UserInfo:
 
     def store_pet_info(self):
         for i in range(int(self.no_of_pets)):
-            name = Question(QuestionEnum.Q7.value).ask()
+            name = Question(QuestionEnum.Q7.value, validation=None).ask()
             name = name.capitalize()
             type = Question(QuestionEnum.Q8.value).ask()
             self.pet_dict[name] = type.lower()
@@ -55,6 +55,7 @@ class UserInfo:
 
     def write_input(self):
         with open("collected_data.csv", 'a') as file:
+            file.write(f"{self.age},{self.city},{self.gender},{self.education},{self.has_pets},")
             if self.has_pets:
                 file.write(f"{self.no_of_pets}")
                 for x in self.pet_dict.keys():
@@ -67,6 +68,3 @@ class UserInfo:
                     file.write(f",{self.change_mind}")
 
             file.write("\n")
-    def write_input(self):
-        with open("collected_data.csv", 'a') as file:
-            file.write(f"{self.age},{self.city},{self.gender},{self.education},{self.has_pets},")
