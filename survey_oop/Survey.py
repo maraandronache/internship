@@ -1,66 +1,50 @@
-from Question import Question
 from QuestionsEnum import QuestionEnum
-from SurveyResponse import SurveyResponse
 
 
-class UserInfo:
+class Survey:
     def __init__(self):
-        self.age = Question(QuestionEnum.Q1.value, validation=lambda x: x.isnumeric()).ask()
-        self.city = Question(QuestionEnum.Q2.value, validation=lambda x: x.isalpha()).ask()
-        self.gender = Question(QuestionEnum.Q3.value, validation=lambda x: x.lower() in QuestionEnum.GENDER.value).ask()
-        self.education = Question(QuestionEnum.Q4.value, validation=lambda x: x.lower() in
-                                                                              QuestionEnum.EDUCATION.value).ask()
-        if Question(QuestionEnum.Q5.value, validation=lambda x: x.lower() in QuestionEnum.YESNO.value).ask() == "yes":
-                self.has_pets = True
-        else:
-                self.has_pets = False
-        self.open_to_adopt = None
-        self.issue = None
-        self.change_mind = None
-        self.no_of_pets = 0
         self.pet_dict = {}
-        self.dict = self.add_answers()
+        self.dict = {}
 
-    def add_answers(self):
-        survey_response = SurveyResponse()
-        survey_response.add_answer(QuestionEnum.Q1.value, self.age)
-        survey_response.add_answer(QuestionEnum.Q2.value, self.city)
-        survey_response.add_answer(QuestionEnum.Q3.value, self.gender)
-        survey_response.add_answer(QuestionEnum.Q4.value, self.education)
-        survey_response.add_answer(QuestionEnum.Q5.value, self.has_pets)
-        return survey_response.dict
 
-    def summary_report(self):
-        if self.has_pets:
-            print(
-                f"The respondent is {self.age} years old, {self.gender.lower()}, from {self.city.capitalize()} city. "
-                f"The highest level of education they have finished is {self.education.lower()} and they own pets.")
+    def start(self):
+        self.age = QuestionEnum.ASK_AGE.value.ask()
+        self.city = QuestionEnum.ASK_CITY.value.ask()
+        self.gender = QuestionEnum.ASK_GENDER.value.ask()
+        self.education = QuestionEnum.ASK_EDUCATION.value.ask()
+        if QuestionEnum.ASK_HAS_PETS.value.ask().lower() == "yes":
+            self.has_pets = True
         else:
-            print(
-                f"The respondent is {self.age} years old, {self.gender.lower()}, from {self.city.capitalize()} city. "
-                f"The highest level of education they have finished is {self.education.lower()} and they do not own "
-                f"pets.")
-
-    def get_more_info(self):
+            self.has_pets = False
         if self.has_pets:
-            self.no_of_pets = Question(QuestionEnum.Q6.value, validation=lambda x: x.isnumeric()).ask()
+            self.no_of_pets = QuestionEnum.ASK_NO_OF_PETS.value.ask()
             self.store_pet_info()
         else:
-            self.open_to_adopt = Question(QuestionEnum.Q9.value,
-                                          validation=lambda x: x.lower() in QuestionEnum.YESNO.value).ask()
+            self.open_to_adopt = QuestionEnum.ASK_OPEN_TO_ADOPT.value.ask()
             if self.open_to_adopt:
-                self.issue = Question(QuestionEnum.Q10.value).ask()
+                self.issue = QuestionEnum.ASK_ISSUE.value.ask()
             else:
-                self.change_mind = Question(QuestionEnum.Q11.value).ask()
+                self.change_mind = QuestionEnum.ASK_CHANGE_MIND.value.ask()
 
     def store_pet_info(self):
         for i in range(int(self.no_of_pets)):
-            name = Question(QuestionEnum.Q7.value, validation=None).ask()
+            name = QuestionEnum.ASK_NAME_OF_PETS.value.ask()
             name = name.capitalize()
-            type = Question(QuestionEnum.Q8.value).ask()
+            type = QuestionEnum.ASK_TYPE_OF_PETS.value.ask()
             self.pet_dict[name] = type.lower()
 
-    def write_input(self):
+    def add_answer(self, question, answer):
+        self.dict[question] = answer
+
+    def add_answers(self):
+        self.add_answer(QuestionEnum.ASK_AGE, self.age)
+        self.add_answer(QuestionEnum.ASK_CITY, self.city)
+        self.add_answer(QuestionEnum.ASK_GENDER, self.gender)
+        self.add_answer(QuestionEnum.ASK_EDUCATION, self.education)
+        self.add_answer(QuestionEnum.ASK_HAS_PETS, self.has_pets)
+        return self.dict
+
+    def write(self):
         with open("collected_data.csv", 'a') as file:
             for x in self.dict.keys():
                 file.write(f"{self.dict[x]},")
