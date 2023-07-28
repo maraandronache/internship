@@ -1,8 +1,8 @@
-from UserInfo import UserInfo
+from Survey import Survey
 
 if __name__ == "__main__":
-    user_input = UserInfo()
-    user_input.summary_report()
-    user_input.get_more_info()
-    user_input.write_input()
+    user_input = Survey()
+    user_input.start()
+    user_input.add_answers()
+    user_input.write()
 
