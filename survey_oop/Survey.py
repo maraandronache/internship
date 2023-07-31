@@ -1,6 +1,5 @@
 from QuestionsEnum import QuestionEnum
 
-
 class Survey:
     def __init__(self):
         self.pet_dict = {}
