@@ -1,12 +1,12 @@
 from QuestionsEnum import QuestionEnum
 
+
 class Survey:
     def __init__(self):
         self.pet_dict = {}
         self.answers = {}
 
-
-    def basic(self):
+    def ask_basic_info(self):
         for x in (QuestionEnum.ASK_AGE, QuestionEnum.ASK_CITY, QuestionEnum.ASK_GENDER, QuestionEnum.ASK_EDUCATION):
             self.answers[x] = x.value.ask()
 
@@ -15,7 +15,12 @@ class Survey:
         else:
             self.answers[QuestionEnum.ASK_HAS_PETS] = False
 
-    def pet_documentation(self):
+        if self.answers[QuestionEnum.ASK_HAS_PETS]:
+            self.get_pet_documentation()
+        else:
+            self.is_open_to_adopt()
+
+    def get_pet_documentation(self):
         self.no_of_pets = QuestionEnum.ASK_NO_OF_PETS.value.ask()
         self.store_pet_info()
 
@@ -26,13 +31,12 @@ class Survey:
             type = QuestionEnum.ASK_TYPE_OF_PETS.value.ask()
             self.pet_dict[name] = type.lower()
 
-    def open_to_adopt(self):
+    def is_open_to_adopt(self):
         self.open_to_adopt = QuestionEnum.ASK_OPEN_TO_ADOPT.value.ask()
         if self.open_to_adopt:
             self.issue = QuestionEnum.ASK_ISSUE.value.ask()
         else:
             self.change_mind = QuestionEnum.ASK_CHANGE_MIND.value.ask()
-
 
     def write(self):
         with open("collected_data.csv", 'a') as file:

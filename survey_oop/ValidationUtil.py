@@ -1,18 +1,23 @@
 class ValidationUtil:
-    def valid_age(x):
+    @staticmethod
+    def validate_number(x):
         return x.isnumeric()
-    def valid_city(x):
+
+    @staticmethod
+    def validate_city(x):
         return x.isalpha()
 
-    def valid_gender(x):
+    @staticmethod
+    def validate_gender(x):
         gender = ("male", "female")
         return x.lower() in gender
 
-    def valid_education(x):
+    @staticmethod
+    def validate_education(x):
         education = ("middle school", "high school", "college", "bachelor degree", "master degree", "phd")
         return x in education
 
-    def valid_yes_no(x):
+    @staticmethod
+    def validate_yes_or_no(x):
         yes_no = ("yes", "no")
         return x.lower() in yes_no
-
