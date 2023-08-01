@@ -1,7 +1,11 @@
 from Survey import Survey
-from QuestionsEnum import QuestionEnum
+from Question import InvalidInput
 
+# calls methods from Survey in order for the code to actually run
 if __name__ == "__main__":
-    user_input = Survey()
-    user_input.ask_basic_info()
-    user_input.write()
+    survey = Survey()
+    try:
+        survey.ask_basic_info()
+        survey.write()
+    except InvalidInput as error:
+        print(error)

@@ -1,3 +1,4 @@
+# class containing all validation rules
 class ValidationUtil:
     @staticmethod
     def validate_number(x):

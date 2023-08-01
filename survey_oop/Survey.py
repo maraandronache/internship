@@ -1,33 +1,34 @@
+# the main class in which answers from the survey are collected
 from QuestionsEnum import QuestionEnum
 
-class InvalidInput(Exception):
-    pass
 
 class Survey:
     def __init__(self):
-        self.pet_dict = {}
-        self.answers = {}
+        self.pet_dict = {}  # storing pets' name & type
+        self.answers = {}  # storing th answers to basic questions
 
+    # gets the answers for the basic info
     def ask_basic_info(self):
         for x in (QuestionEnum.ASK_AGE, QuestionEnum.ASK_CITY, QuestionEnum.ASK_GENDER, QuestionEnum.ASK_EDUCATION):
             self.answers[x] = x.value.ask()
-            if self.answers[x] == None:
-                raise InvalidInput(f"You have entered invalid input 3 times for qustion {x.value}. Please restart the survey.")
 
         if QuestionEnum.ASK_HAS_PETS.value.ask().lower() == "yes":
             self.answers[QuestionEnum.ASK_HAS_PETS] = True
         else:
             self.answers[QuestionEnum.ASK_HAS_PETS] = False
 
+        # asks the following question, based on whether the person has animals or not
         if self.answers[QuestionEnum.ASK_HAS_PETS]:
             self.get_pet_documentation()
         else:
             self.is_open_to_adopt()
 
+    # gets all pet info (name & type)
     def get_pet_documentation(self):
         self.no_of_pets = QuestionEnum.ASK_NO_OF_PETS.value.ask()
         self.store_pet_info()
 
+    # stores all pet info (name & type)
     def store_pet_info(self):
         for i in range(int(self.no_of_pets)):
             name = QuestionEnum.ASK_NAME_OF_PETS.value.ask()
@@ -35,6 +36,7 @@ class Survey:
             type = QuestionEnum.ASK_TYPE_OF_PETS.value.ask()
             self.pet_dict[name] = type.lower()
 
+    # finds out whether the person is open to adopting or not, then asks the following questions
     def is_open_to_adopt(self):
         self.open_to_adopt = QuestionEnum.ASK_OPEN_TO_ADOPT.value.ask()
         if self.open_to_adopt:
@@ -42,6 +44,7 @@ class Survey:
         else:
             self.change_mind = QuestionEnum.ASK_CHANGE_MIND.value.ask()
 
+    # writes answers in the csv file, in order to analyze them
     def write(self):
         with open("collected_data.csv", 'a') as file:
             for x in self.answers.keys():
