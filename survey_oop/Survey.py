@@ -1,5 +1,7 @@
 from QuestionsEnum import QuestionEnum
 
+class InvalidInput(Exception):
+    pass
 
 class Survey:
     def __init__(self):
@@ -9,6 +11,8 @@ class Survey:
     def ask_basic_info(self):
         for x in (QuestionEnum.ASK_AGE, QuestionEnum.ASK_CITY, QuestionEnum.ASK_GENDER, QuestionEnum.ASK_EDUCATION):
             self.answers[x] = x.value.ask()
+            if self.answers[x] == None:
+                raise InvalidInput(f"You have entered invalid input 3 times for qustion {x.value}. Please restart the survey.")
 
         if QuestionEnum.ASK_HAS_PETS.value.ask().lower() == "yes":
             self.answers[QuestionEnum.ASK_HAS_PETS] = True

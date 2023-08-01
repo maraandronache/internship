@@ -11,5 +11,4 @@ class Question:
                 return answer
             self.wrong_answers += 1
         else:
-            raise SyntaxError(f"You have answered the question '{self.prompt}' with an invalid input 3 times. "
-                              f"Please restart the survey.")
+            return None
