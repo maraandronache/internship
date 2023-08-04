@@ -2,6 +2,7 @@ from enum import Enum
 from Question import Question
 from ValidationUtil import ValidationUtil
 
+
 # stores all questions using the Question class, including the validation using th ValidationUtil class
 class QuestionEnum(Enum):
     ASK_AGE = Question("What is your age? ", validation=ValidationUtil.validate_number)

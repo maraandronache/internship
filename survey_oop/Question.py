@@ -1,9 +1,11 @@
 # the class in which the custom error is created, for when the participant answers wrong 3 times for a single question
+
 class InvalidInput(Exception):
     pass
 
+
 # class made to ask the questions more efficiently, using the prompt and a validation rule (or none)
-class Question:
+class Question():
     def __init__(self, prompt, validation=None):
         self.prompt = prompt
         self.validation = validation

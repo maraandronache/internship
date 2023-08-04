@@ -1,8 +1,12 @@
 # the main class in which answers from the survey are collected
 from QuestionsEnum import QuestionEnum
+from UsedBase import Base
+from Date import AddDate
+from sqlalchemy import create_engine
 
+engine = create_engine("mysql+mysqlconnector://root:mara@localhost:3306/survey")
 
-class Survey:
+class Survey():
     def __init__(self):
         self.pet_dict = {}  # storing pets' name & type
         self.answers = {}  # storing th answers to basic questions
@@ -46,6 +50,7 @@ class Survey:
 
     # writes answers in the csv file, in order to analyze them
     def write(self):
+        AddDate.add()
         with open("collected_data.csv", 'a') as file:
             for x in self.answers.keys():
                 file.write(f"{self.answers[x]},")
