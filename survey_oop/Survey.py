@@ -14,9 +14,9 @@ class Survey():
     # gets the answers for the basic info
     def ask_basic_info(self):
         for x in (QuestionEnum.ASK_AGE, QuestionEnum.ASK_CITY, QuestionEnum.ASK_GENDER, QuestionEnum.ASK_EDUCATION):
-            self.answers[x] = x.value.ask()
+            self.answers[x] = x.value.question.ask()
 
-        if QuestionEnum.ASK_HAS_PETS.value.ask().lower() == "yes":
+        if QuestionEnum.ASK_HAS_PETS.value.question.ask().lower() == "yes":
             self.answers[QuestionEnum.ASK_HAS_PETS] = True
         else:
             self.answers[QuestionEnum.ASK_HAS_PETS] = False
