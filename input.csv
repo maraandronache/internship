@@ -1,3 +1,8 @@
 18,bucharest,male,phd,True,1,Lily,cat
 36,bucharest,female,phd,False,yes,blahblahblah
 18,bucharest,female,middle school,True,2,Lily,cat,Zizi,cat
+34,cluj,male,phd,True,3,Max,dog,Zbanti,tortoise,Lola,bunny
+29,pitesti,male,high school,False,no,blhblahblah
+67,pitesti,male,master degree,True,6,Lily,dog,Zuza,cat,Puiu,parrot,Max,dog,Mira,bunny,Zbanti,turtle
+78,ploiesti,female,master degree,False,yes,blahblah
+45,cluj,male,phd,True,5,Mika,dog,Max,dog,Toto,dog,Zizi,cat,Pufu,cat

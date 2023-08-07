@@ -1,0 +1,8 @@
+A total number of 8 people have taken this survey, out of which 5 own pets and 3 do not.
+The average age of all the respondents is 40.62. 5 males (62.5%) and 3 females (37.5%) have answered this survey
+Overall, about 62.5% own pets, and 37.5% do not.
+The average age of those who own pets is 36.4, while the average age of those who do not is 47.67.
+There are more male pet owners (80.0%) than female ones (20.0%).
+The most common type of pet is a cat.
+The most common pet name that appears in the survey is Lily.
+More female non-owners (100.0%) are open to adopting or buying pets than male non-owners (0.0%).

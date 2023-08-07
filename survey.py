@@ -81,4 +81,5 @@ else:
         change_mind = input("What would change your mind? ")
         file.write(',' + change_mind)
 
+
 file.write('\n')
