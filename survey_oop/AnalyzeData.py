@@ -36,6 +36,12 @@ class AnalyzeData():
         self.two_colors = ["#9BABB8", "#EEE3CB"]
         self.five_colors = ["#9BABB8", "#EEE3CB", "#967E76", "#D7C0AE", "#28536B"]
 
+    def create_pie_chart(self, frequency, labels, colors, title):
+        plt.pie(frequency, labels=labels, colors=colors, autopct=lambda p: '{:.0f}'.format(p * sum(frequency) / 100))
+        plt.legend(loc='upper left', bbox_to_anchor=(-0.40, 1))
+        plt.title(title)
+        plt.show()
+
 
     def analyze_data(self):
         self.analyze_age()
@@ -56,53 +62,37 @@ class AnalyzeData():
     def analyze_gender(self):
         y = np.array(self.gender)
         labels = ["Female", "Male"]
-        plt.pie(y, labels=labels, colors=self.two_colors)
-        plt.title('Gender Distribution')
-        plt.show()
+        self.create_pie_chart(y, labels, self.two_colors, "Gender Distribution")
 
     def analyze_owners_vs_non_owners(self):
         y = np.array(self.has_pets)
         labels = ["Has pets", "Does not have pets"]
-        plt.pie(y, labels=labels, colors=self.two_colors)
-        plt.title('Owners vs. Non-Owners')
-        plt.show()
+        self.create_pie_chart(y, labels, self.two_colors, "People who are pet owners vs. those who are not")
 
     def get_education_distribution(self):
         frequency = Counter(self.education)
         labels = list(frequency.keys())
         frequencies = list(frequency.values())
-        plt.pie(frequencies, labels=labels, colors=self.five_colors)
-        plt.legend(loc='upper left')
-        plt.title('Education Distribution')
-        plt.show()
+        self.create_pie_chart(frequencies, labels, self.five_colors, "Education Distribution")
 
     def get_most_common_pet_names(self):
         frequencies = Counter(self.pet_names)
         most_common = frequencies.most_common(5)
         counts = [x[1] for x in most_common]
         labels = [x[0][0] for x in most_common]
-        plt.pie(counts, labels=labels, colors=self.five_colors, autopct=lambda p: '{:.0f}'.format(p * sum(counts) / 100))
-        plt.legend(loc='upper left')
-        plt.title('Most common pet names')
-        plt.show()
+        self.create_pie_chart(counts, labels, self.five_colors, "5 most common pet names")
 
     def get_most_common_pet_types(self):
         frequencies = Counter(self.pet_types)
         most_common = frequencies.most_common(5)
         counts = [x[1] for x in most_common]
         labels = [x[0][0] for x in most_common]
-        plt.pie(counts, labels=labels, colors=self.five_colors, autopct=lambda p: '{:.0f}'.format(p * sum(counts) / 100))
-        plt.legend(loc='upper left')
-        plt.title('Most common pet types')
-        plt.show()
+        self.create_pie_chart(counts, labels, self.five_colors, "5 most common pet types")
 
     def analyze_open_to_adopt(self):
         y = np.array(self.is_open_to_adopt)
         labels = ["Open to adopt", "Not open to adopt"]
-        plt.pie(y, labels=labels, colors=self.two_colors)
-        plt.title('People open to adopting pets vs. people not open to adopting pets')
-        plt.show()
-
+        self.create_pie_chart(y, labels, self.two_colors, "People who are open to adopt versus those who are not")
 
 
 
