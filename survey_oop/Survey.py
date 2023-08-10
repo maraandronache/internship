@@ -5,13 +5,15 @@ from sqlalchemy import create_engine
 from AddAnswers import AddAnswer
 from sqlalchemy.orm import sessionmaker
 from SurveysTable import Surveys
+from GenerateAnswersEnum import GenerateAnswersEnum
+import random
 
 engine = create_engine("mysql+mysqlconnector://root:mara@localhost:3306/survey")
 
 class Survey():
     def __init__(self):
         self.pet_dict = {}  # storing pets' name & type
-        self.answers = {}  # storing th answers to basic questions
+        self.answers = {}  # storing th answers to basic question
 
     # gets the answers for the basic info
     def ask_basic_info(self):
@@ -28,6 +30,26 @@ class Survey():
             self.get_pet_documentation()
         else:
             self.is_open_to_adopt()
+
+    def generate_random_answers(self):
+        self.answers[QuestionEnum.ASK_AGE] = random.randint(10, 100)
+        self.answers[QuestionEnum.ASK_CITY] = random.choice(GenerateAnswersEnum.CITY_OPTIONS.value)
+        self.answers[QuestionEnum.ASK_GENDER] = random.choice(GenerateAnswersEnum.GENDER_OPTIONS.value)
+        self.answers[QuestionEnum.ASK_EDUCATION] = random.choice(GenerateAnswersEnum.EDUCATION_OPTIONS.value)
+        if random.choice(GenerateAnswersEnum.YES_NO_OPTIONS.value) == "yes":
+            self.answers[QuestionEnum.ASK_HAS_PETS] = True
+            self.no_of_pets = random.randint(1, 10)
+            for i in range(int(self.no_of_pets)):
+                name = random.choice(GenerateAnswersEnum.PET_NAMES_OPTIONS.value)
+                type = random.choice(GenerateAnswersEnum.PET_TYPES_OPTIONS.value)
+                self.pet_dict[name] = type
+        else:
+            self.answers[QuestionEnum.ASK_HAS_PETS] = False
+            self.open_to_adopt = random.choice(GenerateAnswersEnum.YES_NO_OPTIONS.value)
+            if self.open_to_adopt == "yes":
+                self.issue = "random"
+            else:
+                self.change_mind = "random"
 
     # gets all pet info (name & type)
     def get_pet_documentation(self):
@@ -58,11 +80,9 @@ class Survey():
 
 
     # writes answers in the csv file, in order to analyze them
-    def write(self):
+    def save_to_database(self):
         AddDate.add()
         survey_id = self.get_survey_id()
-        # Session = sessionmaker(bind=engine)
-        # session = Session()
         for x in self.answers.keys():
             new_answer = AddAnswer(self.answers[x], x.value.id, survey_id)
             new_answer.add_answers()
@@ -73,12 +93,12 @@ class Survey():
             for x in self.pet_dict.keys():
                 add_name_of_pet = AddAnswer(x, QuestionEnum.ASK_NAME_OF_PETS.value.id, survey_id)
                 add_name_of_pet.add_answers()
-                add_type_of_pet= AddAnswer(self.pet_dict[x], QuestionEnum.ASK_TYPE_OF_PETS.value.id, survey_id)
+                add_type_of_pet = AddAnswer(self.pet_dict[x], QuestionEnum.ASK_TYPE_OF_PETS.value.id, survey_id)
                 add_type_of_pet.add_answers()
         else:
             add_open_to_adopt = AddAnswer(self.open_to_adopt, QuestionEnum.ASK_OPEN_TO_ADOPT.value.id, survey_id)
             add_open_to_adopt.add_answers()
-            if self.open_to_adopt:
+            if self.open_to_adopt == "yes":
                 add_issue = AddAnswer(self.issue, QuestionEnum.ASK_ISSUE.value.id, survey_id)
                 add_issue.add_answers()
             else:
