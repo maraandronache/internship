@@ -45,13 +45,13 @@ class AnalyzeData():
 
 
     def analyze_data(self):
-        # self.analyze_age()
-        # self.analyze_gender()
-        # self.get_education_distribution()
-        # self.analyze_owners_vs_non_owners()
-        # self.get_most_common_pet_names()
-        # self.get_most_common_pet_types()
-        # self.analyze_open_to_adopt()
+        self.analyze_age()
+        self.analyze_gender()
+        self.get_education_distribution()
+        self.analyze_owners_vs_non_owners()
+        self.get_most_common_pet_names()
+        self.get_most_common_pet_types()
+        self.analyze_open_to_adopt()
         self.write_report()
 
     def analyze_age(self):
