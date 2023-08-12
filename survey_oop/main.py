@@ -5,9 +5,12 @@ from ValidationUtil import ValidationUtil
 from AnalyzeData import AnalyzeData
 
 
+
 # calls methods from Survey in order for the code to actually run
 if __name__ == "__main__":
     survey = Survey()
+    analysis = AnalyzeData()
+    analysis.analyze_data()
     try:
         survey.ask_basic_info()
         survey.save_to_database()

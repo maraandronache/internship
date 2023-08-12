@@ -26,5 +26,3 @@ class AddDate():
         session.add(new_date)
         session.commit()
         session.close()
-
-
