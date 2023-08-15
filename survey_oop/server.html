@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Welcome to our survey!</title>
+</head>
+<body>
+    <h1>Welcome to our survey!</h1>
+    <form method='POST' action='/submit_survey'>
+        Age: <input type='text' name='age'><br>
+        City: <input type='text' name='city'><br>
+        Gender:
+        <select name='gender'>
+            <option value='male'>Male</option>
+            <option value='female'>Female</option>
+        </select><br>
+        Highest level of education achieved:
+        <select name='education'>
+            <option value='middle school'>Middle School</option>
+            <option value='high school'>High School</option>
+            <option value='bachelor degree'>Bachelor Degree</option>
+            <option value='master degree'>Master Degree</option>
+            <option value='phd'>PhD</option>
+        </select><br>
+        Do you have pets?:
+        <select name='has_pets'>
+          <option value=1>Yes</option>
+          <option value=0>No</option>
+        </select><br>
+        <input type='submit' value='Continue Survey'>
+    </form>
+    <div id="error-message" style="color: red;"></div>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var errorMessage = urlParams.get('error');
+        if (errorMessage) {
+            document.getElementById('error-message').textContent = errorMessage;
+        }
+    </script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@ from Question import InvalidInput
 from Question import Question
 from ValidationUtil import ValidationUtil
 from AnalyzeData import AnalyzeData
-from Server import MyServer
+from Server import Server
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 
@@ -14,7 +14,7 @@ serverPort = 8080
 # calls methods from Survey in order for the code to actually run
 if __name__ == "__main__":
 
-    # webServer = HTTPServer((hostName, serverPort), MyServer)
+    # webServer = HTTPServer((hostName, serverPort), Server)
     # print("Server started http://%s:%s" % (hostName, serverPort))
     try:
         # try:
